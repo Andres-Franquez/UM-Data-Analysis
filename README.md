@@ -1,0 +1,1 @@
+Analyzed a comprehensive dataset of ultramarathon race results spanning across two centuries.The project involved cleaning and preprocessing the data using Pandas, followed by detailed analysis and visualization with Seaborn to uncover trends and insights specific to these races.
