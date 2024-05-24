@@ -21,9 +21,44 @@ df[df['Event name'].str.split('(').str.get(1).str.split(')').str.get(0) == 'USA'
 
 df2 = df[(df["Event distance/length"].isin(['50km','50mi'])) & (df['Year of event'] == 2020) & (df['Event name'].str.split('(').str.get(1).str.split(')').str.get(0) == 'USA')]
 
-#df2 = df[(df["Event distance/length"].isin(['50km','50mi'])) & (df['Year of event'] == 2020) & (df['Event name'].str.split(')').str.get(1))]
 #remove USA from event name
-
 df2['Event name'] = df2['Event name'].str.split('(').str.get(0)
 
-print(df2)
+
+#clean up athlete age
+
+df2['athlete_age'] = 2020 - df2['Athlete year of birth']
+
+#remove h from athlete performane
+
+df2['Athlete performance'] = df2['Athlete performance'].str.split('(').str.get(0)
+
+#drop columns Athlete club, athlete country, athlete year of birth, athlete age category
+
+df2 = df2.drop(['Athlete club', 'Athlete country', 'Athlete year of birth', 'Athlete age category'], axis = 1)
+
+#clean up null values 
+
+df2.isna().sum()
+
+#look at examples
+df2[df2['athlete_age'].isna()==1]
+
+#drop the rows 
+
+df2 = df2.dropna()
+
+#check for duplicates 
+
+df2[df2.duplicated() == True]
+
+#reset the index
+
+df2.reset_index(drop = True)
+
+#fix the types 
+#df2.dtypes
+
+df2['athlete_age'] = df2['athlete_age'].astype(int)
+df2['Athlete average speed'] = df2['Athlete average speed'].astype(float)
+
