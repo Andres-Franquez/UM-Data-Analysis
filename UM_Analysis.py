@@ -62,3 +62,22 @@ df2.reset_index(drop = True)
 df2['athlete_age'] = df2['athlete_age'].astype(int)
 df2['Athlete average speed'] = df2['Athlete average speed'].astype(float)
 
+#renaming columns for efficiency 
+df2 = df2.rename(columns = {
+    "Year of event":'year',
+    'Event dates':'race_day',
+    'Event name':'race_name',
+    'Event distance/length':'race_length',
+    'Event number of finishers': 'race_number_of_finishers',
+    'Athlete performance' : 'athlete_performance',
+    'Athlete gender': 'athlete_gender',
+    'Athlete average speed': 'athlete_average_speed',
+    'Athlete ID': 'athlete_id'
+})
+
+#reordering for preference
+df3 = df2[['race_day', 'race_name', 'race_length', 'race_number_of_finishers', 'athlete_id', 'athlete_gender', 'athlete_age', 'athlete_performance', 'athlete_average_speed', 'year']]
+
+#charts and graphs 
+sns.histplot(df3['race_length'])
+
